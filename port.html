@@ -4,222 +4,553 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lucas Emídio | Desenvolvedor Front-End</title>
+    <meta name="description" content="Portfólio interativo de Lucas Emídio, desenvolvedor Front-End especializado em interfaces modernas, dinâmicas e de alto impacto.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="port.css">
-   <script src="port.js"></script>
-    <script src="https://kit.fontawesome.com/ba31ae48f8.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <section id="vertice">
-        <h3 id="principal"> Lucas <i class="fa-solid fa-code" style="color: blueviolet;"></i></h3>
+    <!-- Canvas de Partículas Interativas no Fundo -->
+    <canvas id="bg-canvas"></canvas>
 
-        <nav id="cabeçalho">
+    <!-- Orbes de Luz e Gradientes Animados de Fundo -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+    <div class="cursor-spotlight" id="spotlight"></div>
 
-            <a href="#" class="menu">inicio</a>
-            <a href="#" class="menu">Sobre</a>
-            <a href="#" class="menu">Projetos</a>
-            <a href="#" class="menu">Habilidades</a>
-            <a href="#" class="menu">Contato</a>
+    <!-- Cabeçalho Fixo & Translúcido -->
+    <header id="cabecalho">
+        <div class="header-container">
+            <a href="#inicio" class="logo">
+                <span class="logo-bracket">&lt;</span>Lucas<span class="logo-dot">.dev</span><span class="logo-bracket">/&gt;</span>
+            </a>
 
-        </nav>
-        <div class="icones">
+            <nav id="nav-menu">
+                <a href="#inicio" class="nav-link active">Início</a>
+                <a href="#sobre" class="nav-link">Sobre</a>
+                <a href="#projetos" class="nav-link">Projetos</a>
+                <a href="#tecnologias" class="nav-link">Tecnologias</a>
+                <a href="#contato" class="nav-link">Contato</a>
+            </nav>
 
-            <div class="icone"> <i class="fa-regular fa-moon" style="color: rgb(8, 81, 128);"></i>
+            <div class="header-actions">
+                <button id="theme-toggle" class="btn-icon" aria-label="Alternar tema visual" title="Alternar tema">
+                    <i class="fa-regular fa-moon"></i>
+                </button>
+                <a href="#contato" class="btn-header-cta">
+                    <span>Vamos conversar</span>
+                    <i class="fa-solid fa-bolt"></i>
+                </a>
+                <button id="btn-mobile" class="btn-icon mobile-only" aria-label="Abrir menu móvel">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- SEÇÃO HERO COM IMAGEM 3D PARALLAX & ESPELHAMENTO -->
+        <section id="inicio" class="hero-section">
+            <div class="hero-container">
+                
+                <!-- Conteúdo textual à esquerda -->
+                <div class="hero-conteudo">
+                    <div class="status-pill">
+                        <span class="status-indicator"></span>
+                        <span>Disponível para novos projetos</span>
+                    </div>
+
+                    <h2 class="hero-ola">OLÁ MUNDO, EU SOU</h2>
+                    <h1 class="hero-nome">LUCAS EMÍDIO</h1>
+
+                    <!-- Efeito de Digitação Dinâmica -->
+                    <div class="typing-container">
+                        <span class="typing-prefix">&gt; </span>
+                        <span id="typing-text" class="typing-text"></span>
+                        <span class="typing-cursor">_</span>
+                    </div>
+
+                    <p class="hero-descricao">
+                        Desenvolvo experiências digitais de ponta a ponta: interfaces interativas, 
+                        código limpo, animações responsivas e foco obsessivo nos detalhes visuais.
+                    </p>
+
+                    <div class="hero-botoes">
+                        <a href="#projetos" class="btn btn-primary">
+                            <span>Explorar Projetos</span>
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                        <button id="btn-sobre-modal" class="btn btn-glass">
+                            <i class="fa-regular fa-id-badge"></i>
+                            <span>Bio Rápida</span>
+                        </button>
+                    </div>
+
+                    <div class="hero-social">
+                        <span class="social-label">Redes:</span>
+                        <a href="https://github.com/lucasemidioalves181" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="mailto:lucasemidioyt@gmail.com" class="social-btn" aria-label="E-mail">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/5588998680880" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Imagem Interativa com 3D Tilt, Efeito Mouse e Espelhamento -->
+                <div class="hero-interactive-stage" id="heroStage">
+                    
+                    <!-- Badges flutuantes interativas ao redor da imagem -->
+                    <div class="floating-badge badge-top-left" data-speed="2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <div>
+                            <strong>UI / UX</strong>
+                            <small>Design Interativo</small>
+                        </div>
+                    </div>
+
+                    <div class="floating-badge badge-bottom-right" data-speed="-2">
+                        <i class="fa-solid fa-code"></i>
+                        <div>
+                            <strong>100% Responsivo</strong>
+                            <small>Mobile & Desktop</small>
+                        </div>
+                    </div>
+
+                    <!-- Container da Imagem com 3D Tilt e Espelhamento -->
+                    <div class="hero-character-wrapper" id="characterWrapper">
+                        <div class="character-glow" id="characterGlow"></div>
+                        
+                        <!-- Imagem Principal -->
+                        <img src="imgs/imagem2.png" alt="Lucas Emídio Desenvolvedor" id="heroImage" class="character-img">
+                        
+                        <!-- Efeito de Espelhamento Refletido na Base -->
+                        <div class="character-reflection-container">
+                            <img src="imgs/imagem2.png" alt="" class="character-reflection-img" aria-hidden="true">
+                            <div class="reflection-gradient-fade"></div>
+                        </div>
+
+                        <!-- Chão com grade holográfica de luz -->
+                        <div class="holographic-base"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO SOBRE MIM: TERMINAL INTERATIVO AO INVÉS DE CARDS GENÉRICOS -->
+        <section id="sobre" class="section">
+            <div class="section-header">
+                <span class="section-tag">&lt;code&gt; // 01. QUEM SOU &lt;/code&gt;</span>
+                <h2 class="section-title">Sobre Mim &amp; Trajetória</h2>
+                <p class="section-subtitle">Conheça um pouco mais sobre minha visão de desenvolvimento e meus pilares técnicos.</p>
             </div>
 
-            <div class="icone"><i class="fa-solid fa-bars" style="color: rgb(8, 81, 128);"></i></div>
-        </div>
-    </section>
+            <div class="sobre-interactive-container">
+                <!-- Lado Esquerdo: Imagem com moldura moderna de código -->
+                <div class="sobre-visual">
+                    <div class="workspace-card">
+                        <div class="workspace-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="tab-label">workspace.preview</span>
+                        </div>
+                        <div class="workspace-img-wrapper">
+                            <img src="pcimg.png" alt="Workspace de desenvolvimento" id="img-workspace">
+                            <div class="workspace-overlay">
+                                <span><i class="fa-solid fa-terminal"></i> Front-End Stack</span>
+                            </div>
+                        </div>
+                    </div>
 
-
-    <section id="hero">
-        <img src="/imgs/imagem2.png" alt="" id="ilucas">
-
-
-        <div id="conteudo">
-
-            <h3 class="dev" id="dev1">OLÁ EU SOU, </h3>
-            <h1 class="dev" id="dev2">LUCAS</h1>
-            <h2 class="dev" id="dev3">DESENVOLVEDOR FRONT-END</h2>
-            <p>Transformo ideias em expêriencias digitais <br> modernas, responsivas e funcionais </p>
-
-
-        </div>
-
-        <div id="botoes">
-            <button id="btnverprojeto">Ver Projetos</button>
-
-            <button id="btnsobremim" onclick="sobre()">Sobre mim</button>
-            <div id="popup">Me chamo Lucas, sou densenvolvedor Júnior. <button id="fecharpopup" onclick="fecharpopup()">X</button></div>
-            <a href="#" class="redessociais"> <i class="fa-brands fa-github"></i></a>
-            <a href="#" class="redessociais"> <i class="fa-solid fa-envelope"></i></a>
-            <a href="#" class="redessociais"><i class="fa-brands fa-square-instagram"></i></a>
-        </div>
-
-    </section>
-
-    <section id="meio">
-        <h3>SOBRE MIM</h3>
-        <img src="pcimg.png" alt="" id="imgpc">
-        <div id="quemsoueu">
-            <h2>Quem sou eu ?</h2>
-            <p>Sou desenvolvedor front-end com foco em construir <br>interfaces limpas,responsivas e com ótima
-                experiência
-                de usuário.
-                <br>
-                <br>
-                Estou sempre aprendendo e buscando evoluir minhas <br> habilidades em HTML, CSS e JavaScript para criar
-                soluções eficientes e modernas.
-            </p>
-        </div>
-        <div id="quadroprincipal">
-            <p class="quadro"> <span> <i class="fa-solid fa-code" style="color: rgb(108, 42, 195);"> </i> Foco</span>
-                <br> front-end
-            </p>
-            <p class="quadro"> <span> <i class="fa-solid fa-graduation-cap" style="color: rgb(108, 42, 195);"></i>
-                    Formado</span> <br>ADS</p>
-            <p class="quadro"> <span> <i class="fa-solid fa-map-location-dot" style="color: rgb(108, 42, 195);"></i>
-                    Localização</span> <br> Brasil</p>
-        </div>
-    </section>
-
-    <section id="projetos">
-
-        <h3>PROJETOS EM DESTAQUE</h3>
-
-        <div id="quadro_projetos">
-
-            <div class="destaques">
-
-
-                <img src="imgs/ChatGPT Image 23 de ago. de 2026, 17_31_54.png" alt="">
-                <div class="info">
-                    <i class="fa-solid fa-cart-shopping" style="color: rgb(108, 42, 195);"></i>
-                    <p class="base_loja">Sua Loja</p>
+                    <!-- Métricas de experiência fluídas -->
+                    <div class="metricas-fluxo">
+                        <div class="metrica-item">
+                            <span class="metrica-numero">+100%</span>
+                            <span class="metrica-texto">Dedicação a Código Limpo</span>
+                        </div>
+                        <div class="metrica-divisor"></div>
+                        <div class="metrica-item">
+                            <span class="metrica-numero">ADS</span>
+                            <span class="metrica-texto">Formação Superior</span>
+                        </div>
+                        <div class="metrica-divisor"></div>
+                        <div class="metrica-item">
+                            <span class="metrica-numero">BR</span>
+                            <span class="metrica-texto">Ceará, Brasil</span>
+                        </div>
+                    </div>
                 </div>
-                <p class="info1">E-commerce responsivo para seus produtos </p>
-                <div class="infolinguagens">
-                    <p class="infolinguagens1">HTML</p>
-                    <p class="infolinguagens1">CSS3</p>
-                    <p class="infolinguagens1">JS</p>
+
+                <!-- Lado Direito: Terminal Interativo de Desenvolvedor -->
+                <div class="terminal-ide" id="devTerminal">
+                    <div class="terminal-topbar">
+                        <div class="terminal-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="terminal-tabs">
+                            <button class="terminal-tab active" data-tab="perfil">perfil.js</button>
+                            <button class="terminal-tab" data-tab="habilidades">habilidades.json</button>
+                            <button class="terminal-tab" data-tab="filosofia">mindset.ts</button>
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo das Abas do Terminal -->
+                    <div class="terminal-code-body">
+                        <!-- Aba 1: perfil.js -->
+                        <div class="tab-content active" id="tab-perfil">
+                            <pre><code><span class="c-keyword">const</span> <span class="c-variable">desenvolvedor</span> = {
+  <span class="c-prop">nome</span>: <span class="c-string">"Lucas Emídio"</span>,
+  <span class="c-prop">cargo</span>: <span class="c-string">"Desenvolvedor Front-End"</span>,
+  <span class="c-prop">local</span>: <span class="c-string">"Brasil"</span>,
+  <span class="c-prop">paixao</span>: <span class="c-string">"Transformar ideias em código fluido e interfaces vivas"</span>,
+  <span class="c-prop">missao</span>: <span class="c-function">()</span> => {
+    <span class="c-keyword">return</span> <span class="c-string">"Construir produtos digitais que aliem estética refinada,
+            alta usabilidade e performance sem atrito."</span>;
+  }
+};
+
+<span class="c-comment">// Clique nas outras abas acima para inspecionar mais!</span></code></pre>
+                        </div>
+
+                        <!-- Aba 2: habilidades.json -->
+                        <div class="tab-content" id="tab-habilidades">
+                            <pre><code>{
+  <span class="c-prop">"linguagens"</span>: [<span class="c-string">"JavaScript (ES6+)"</span>, <span class="c-string">"HTML5"</span>, <span class="c-string">"CSS3"</span>],
+  <span class="c-prop">"estilizacao"</span>: [<span class="c-string">"Flexbox"</span>, <span class="c-string">"CSS Grid"</span>, <span class="c-string">"Animations"</span>, <span class="c-string">"Responsividade"</span>],
+  <span class="c-prop">"ferramentas"</span>: [<span class="c-string">"Git"</span>, <span class="c-string">"GitHub"</span>, <span class="c-string">"VS Code"</span>, <span class="c-string">"Figma"</span>],
+  <span class="c-prop">"proximosPassos"</span>: [<span class="c-string">"React"</span>, <span class="c-string">"TypeScript"</span>, <span class="c-string">"Tailwind CSS"</span>]
+}</code></pre>
+                        </div>
+
+                        <!-- Aba 3: mindset.ts -->
+                        <div class="tab-content" id="tab-filosofia">
+                            <pre><code><span class="c-keyword">interface</span> <span class="c-type">DevMindset</span> {
+  <span class="c-prop">aprendizadoContinuo</span>: <span class="c-type">boolean</span>;
+  <span class="c-prop">atencaoAosDetalhes</span>: <span class="c-type">boolean</span>;
+}
+
+<span class="c-keyword">const</span> <span class="c-variable">meuFoco</span>: <span class="c-type">DevMindset</span> = {
+  <span class="c-prop">aprendizadoContinuo</span>: <span class="c-keyword">true</span>,
+  <span class="c-prop">atencaoAosDetalhes</span>: <span class="c-keyword">true</span>
+};
+
+<span class="c-comment">/* "Interfaces são a ponte entre as pessoas e a tecnologia.
+    Elas devem ser intuitivas, rápidas e memoráveis." */</span></code></pre>
+                        </div>
+                    </div>
+
+                    <div class="terminal-footer">
+                        <span class="terminal-status"><i class="fa-solid fa-code-branch"></i> main</span>
+                        <span class="terminal-status">UTF-8</span>
+                        <span class="terminal-status">JavaScript (Node.js)</span>
+                    </div>
                 </div>
-                <a href="" class="verProjeto">Ver Projeto -></a>
+            </div>
+        </section>
+
+        <!-- SEÇÃO PROJETOS: VITRINE INTERATIVA COM SHOWCASE E FILTRO -->
+        <section id="projetos" class="section">
+            <div class="section-header">
+                <span class="section-tag">&lt;work&gt; // 02. PROJETOS &lt;/work&gt;</span>
+                <h2 class="section-title">Vitrine de Criações</h2>
+                <p class="section-subtitle">Projetos autorais pensados com foco em interface, interatividade e utilidade real.</p>
+                
+                <!-- Filtros Interativos -->
+                <div class="projetos-filtros">
+                    <button class="filtro-btn active" data-filter="todos">Todos</button>
+                    <button class="filtro-btn" data-filter="ecommerce">E-Commerce</button>
+                    <button class="filtro-btn" data-filter="dashboards">Dashboards</button>
+                    <button class="filtro-btn" data-filter="apps">Aplicações</button>
+                </div>
             </div>
 
+            <!-- Vitrine Dinâmica (Design Editorial Não Genérico) -->
+            <div class="showcase-projetos">
+                
+                <!-- Projeto 1: Destaque Principal Expandido -->
+                <article class="showcase-item destaque" data-categoria="ecommerce">
+                    <div class="showcase-preview">
+                        <img src="imgs/ChatGPT Image 23 de ago. de 2026, 17_31_54.png" alt="Sua Loja E-Commerce">
+                        <div class="preview-glass-tag">
+                            <i class="fa-solid fa-star"></i> Projeto em Destaque
+                        </div>
+                    </div>
+                    <div class="showcase-details">
+                        <div class="showcase-header">
+                            <span class="categoria-label">E-COMMERCE &amp; VAREJO</span>
+                            <h3>Sua Loja — Experiência de Compra Responsiva</h3>
+                        </div>
+                        <p>
+                            Plataforma de comércio eletrônico dinâmica focada na jornada do cliente. 
+                            Conta com catálogo navegável, simulação de carrinho em tempo real e visual moderno otimizado para conversão.
+                        </p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">HTML5</span>
+                            <span class="tech-pill">CSS3 Flexbox</span>
+                            <span class="tech-pill">JavaScript ES6</span>
+                            <span class="tech-pill">UI Design</span>
+                        </div>
+                        <div class="showcase-actions">
+                            <a href="#" class="btn btn-primary btn-sm">
+                                <span>Ver Demo</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                            <a href="https://github.com/lucasemidioalves181" target="_blank" rel="noopener noreferrer" class="btn btn-glass btn-sm">
+                                <i class="fa-brands fa-github"></i>
+                                <span>Código Fonte</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
 
-            <div class="destaques">
-                <img src="imgs/ChatGPT Image 23 de ago. de 2026, 17_32_50.png" alt="">
-                <div class="info">
-                    <i class="fa-solid fa-business-time" style="color: rgb(108, 42, 195);"></i>
-                    <p>Negócios</p>
+                <!-- Grid com os outros 3 projetos complementares -->
+                <div class="showcase-subgrid">
+                    
+                    <!-- Projeto 2: Dashboard de Negócios -->
+                    <article class="showcase-item compacto" data-categoria="dashboards">
+                        <div class="showcase-preview">
+                            <img src="imgs/ChatGPT Image 23 de ago. de 2026, 17_32_50.png" alt="Dashboard de Negócios">
+                            <div class="preview-overlay-btn">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <div class="showcase-details">
+                            <span class="categoria-label">DASHBOARDS &amp; DADOS</span>
+                            <h3>Painel de Negócios em Tempo Real</h3>
+                            <p>Visualização analítica de métricas corporativas com gráficos informativos e indicadores chave de desempenho.</p>
+                            <div class="tech-pills">
+                                <span class="tech-pill">HTML5</span>
+                                <span class="tech-pill">CSS Grid</span>
+                                <span class="tech-pill">Charts / JS</span>
+                            </div>
+                            <div class="showcase-actions">
+                                <a href="#" class="btn-link">Ver detalhes <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projeto 3: App de Clima -->
+                    <article class="showcase-item compacto" data-categoria="apps">
+                        <div class="showcase-preview">
+                            <img src="imgs/ChatGPT Image 23 de ago. de 2026, 17_33_33.png" alt="App de Clima">
+                            <div class="preview-overlay-btn">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <div class="showcase-details">
+                            <span class="categoria-label">APLICAÇÕES &amp; API</span>
+                            <h3>Previsão do Tempo &amp; Clima Nacional</h3>
+                            <p>Consulta em tempo real de informações climáticas por cidades com cards dinâmicos e ilustrações responsivas.</p>
+                            <div class="tech-pills">
+                                <span class="tech-pill">JavaScript</span>
+                                <span class="tech-pill">Consumo de APIs</span>
+                                <span class="tech-pill">CSS3</span>
+                            </div>
+                            <div class="showcase-actions">
+                                <a href="#" class="btn-link">Ver detalhes <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projeto 4: Gerenciador de Tarefas -->
+                    <article class="showcase-item compacto" data-categoria="apps">
+                        <div class="showcase-preview">
+                            <img src="imgs/ChatGPT Image 23 de ago. de 2026, 17_34_10.png" alt="Gerenciador de Tarefas">
+                            <div class="preview-overlay-btn">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <div class="showcase-details">
+                            <span class="categoria-label">PRODUTIVIDADE</span>
+                            <h3>Gerenciador de Tarefas Pessoais</h3>
+                            <p>Organizador de rotina diária com criação, checagem, remoção e persistência local (LocalStorage).</p>
+                            <div class="tech-pills">
+                                <span class="tech-pill">DOM Manipulation</span>
+                                <span class="tech-pill">LocalStorage</span>
+                                <span class="tech-pill">UI Responsiva</span>
+                            </div>
+                            <div class="showcase-actions">
+                                <a href="#" class="btn-link">Ver detalhes <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
 
                 </div>
-                <p class="info1">Dados gráficos em tempo real. </p>
-                <div class="infolinguagens">
-                    <p class="infolinguagens1">HTML</p>
-                    <p class="infolinguagens1">CSS3</p>
-                    <p class="infolinguagens1">JS</p>
-                </div>
+            </div>
+        </section>
 
-                <a href="" class="verProjeto">Ver Projeto -></a>
-
+        <!-- SEÇÃO TECNOLOGIAS: HUB TECNOLÓGICO INTERATIVO -->
+        <section id="tecnologias" class="section">
+            <div class="section-header">
+                <span class="section-tag">&lt;stack&gt; // 03. HABILIDADES &lt;/stack&gt;</span>
+                <h2 class="section-title">Arsenal de Tecnologias</h2>
+                <p class="section-subtitle">Ferramentas e tecnologias que utilizo para construir produtos rápidos, elegantes e escaláveis.</p>
             </div>
 
+            <div class="tech-interactive-hub">
+                <!-- Tech 1 -->
+                <div class="tech-hub-item" data-tech="html">
+                    <div class="tech-glow glow-html"></div>
+                    <div class="tech-hub-icon">
+                        <i class="fa-brands fa-html5"></i>
+                    </div>
+                    <div class="tech-hub-info">
+                        <h4>HTML5</h4>
+                        <span class="tech-role">Semântica &amp; SEO</span>
+                        <div class="tech-bar"><div class="tech-progress" style="width: 95%;"></div></div>
+                    </div>
+                </div>
 
-            <div class="destaques">
-                <img src="imgs/ChatGPT Image 23 de ago. de 2026, 17_33_33.png" alt="">
-                <div class="info">
-                    <i class="fa-solid fa-temperature-three-quarters" style="color: rgb(108, 42, 195);"></i>
-                    <p>Clima</p>
+                <!-- Tech 2 -->
+                <div class="tech-hub-item" data-tech="css">
+                    <div class="tech-glow glow-css"></div>
+                    <div class="tech-hub-icon">
+                        <i class="fa-brands fa-css3-alt"></i>
+                    </div>
+                    <div class="tech-hub-info">
+                        <h4>CSS3</h4>
+                        <span class="tech-role">Flexbox, Grid &amp; Animações</span>
+                        <div class="tech-bar"><div class="tech-progress" style="width: 90%;"></div></div>
+                    </div>
                 </div>
-                <p class="info1">Clima em qualquer lugar do país</p>
-                <div class="infolinguagens">
-                    <p class="infolinguagens1">HTML</p>
-                    <p class="infolinguagens1">CSS3</p>
-                    <p class="infolinguagens1">JS</p>
+
+                <!-- Tech 3 -->
+                <div class="tech-hub-item" data-tech="js">
+                    <div class="tech-glow glow-js"></div>
+                    <div class="tech-hub-icon">
+                        <i class="fa-brands fa-square-js"></i>
+                    </div>
+                    <div class="tech-hub-info">
+                        <h4>JavaScript</h4>
+                        <span class="tech-role">ES6+, DOM &amp; APIs</span>
+                        <div class="tech-bar"><div class="tech-progress" style="width: 85%;"></div></div>
+                    </div>
                 </div>
-                <a href="" class="verProjeto">Ver Projeto -></a>
+
+                <!-- Tech 4 -->
+                <div class="tech-hub-item" data-tech="git">
+                    <div class="tech-glow glow-git"></div>
+                    <div class="tech-hub-icon">
+                        <i class="fa-brands fa-git-alt"></i>
+                    </div>
+                    <div class="tech-hub-info">
+                        <h4>Git &amp; GitHub</h4>
+                        <span class="tech-role">Versionamento &amp; Deploy</span>
+                        <div class="tech-bar"><div class="tech-progress" style="width: 85%;"></div></div>
+                    </div>
+                </div>
             </div>
-            <div class="destaques">
-                <img src="imgs/ChatGPT Image 23 de ago. de 2026, 17_34_10.png" alt="">
-                <div class="info">
-                    <i class="fa-solid fa-box-archive" style="color: rgb(108, 42, 195);"></i>
-                    <p>Tarefas</p>
+        </section>
+
+        <!-- SEÇÃO CONTATO: PAINEL DE CONEXÃO DIRETA -->
+        <section id="contato" class="section">
+            <div class="contato-hologram-card">
+                <div class="contato-map-wrapper">
+                    <img src="imgs/mapa.png" alt="Mapa de localização" class="contato-map-img">
+                    <div class="map-radar-pulse"></div>
                 </div>
-                <p class="info1">Prganize suas tarefas e deixe tudo em dia</p>
-                <div class="infolinguagens">
-                    <p class="infolinguagens1">HTML</p>
-                    <p class="infolinguagens1">CSS3</p>
-                    <p class="infolinguagens1">JS</p>
+
+                <div class="contato-inner-content">
+                    <div class="contato-cta">
+                        <span class="section-tag">&lt;connect&gt; // 04. VAMOS CONVERSAR? &lt;/connect&gt;</span>
+                        <h2>Bora tirar uma ideia do papel e transformar em realidade?</h2>
+                        <p>
+                            Seja para uma oportunidade de trabalho, projeto freelancer ou apenas para trocar ideias sobre desenvolvimento front-end, meu canal está sempre aberto!
+                        </p>
+
+                        <!-- Botão Copiar E-mail com Feedback Instantâneo -->
+                        <div class="copy-email-box">
+                            <span class="email-text">lucasemidioyt@gmail.com</span>
+                            <button id="btn-copy-email" class="btn-copy" aria-label="Copiar endereço de e-mail">
+                                <i class="fa-regular fa-copy"></i>
+                                <span class="copy-status">Copiar</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="contato-links-grid">
+                        <a href="mailto:lucasemidioyt@gmail.com" class="contato-link-box">
+                            <div class="link-icon"><i class="fa-solid fa-paper-plane"></i></div>
+                            <div class="link-info">
+                                <strong>Enviar E-mail</strong>
+                                <span>lucasemidioyt@gmail.com</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right link-arrow"></i>
+                        </a>
+
+                        <a href="https://wa.me/5588998680880" target="_blank" rel="noopener noreferrer" class="contato-link-box">
+                            <div class="link-icon whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
+                            <div class="link-info">
+                                <strong>Conversar no WhatsApp</strong>
+                                <span>(88) 99868-0880</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right link-arrow"></i>
+                        </a>
+
+                        <a href="https://github.com/lucasemidioalves181" target="_blank" rel="noopener noreferrer" class="contato-link-box">
+                            <div class="link-icon github"><i class="fa-brands fa-github"></i></div>
+                            <div class="link-info">
+                                <strong>Ver Repositórios</strong>
+                                <span>github.com/lucasemidioalves181</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right link-arrow"></i>
+                        </a>
+                    </div>
                 </div>
-                <a href="" class="verProjeto">Ver Projeto-> </a>
             </div>
+        </section>
+    </main>
 
-
+    <!-- Modal Bio Rápida -->
+    <div id="modal-sobre" class="modal-backdrop" aria-hidden="true">
+        <div class="modal-card">
+            <button id="fechar-modal" class="modal-close" aria-label="Fechar modal">&times;</button>
+            <div class="modal-header">
+                <span class="modal-badge">&lt;bio.json /&gt;</span>
+                <h3>Prazer, me chamo Lucas!</h3>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Sou desenvolvedor Front-End apaixonado pelo poder que as linguagens da web possuem de transformar ideias em produtos visuais, funcionais e cativantes.
+                </p>
+                <p>
+                    Graduado em Análise e Desenvolvimento de Sistemas (ADS), foco minha evolução diária em domínio profundo de JavaScript, CSS moderno (Grid, Flexbox, micro-animações), arquitetura de software e boa experiência de usuário (UX).
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="#contato" class="btn btn-primary" onclick="fecharModal()">Vamos conversar</a>
+            </div>
         </div>
+    </div>
 
-
-
-
-    </section>
-
-    <section id="tecnologias">
-
-        <h3>TECNOLOGIAS QUE UTILIZO</h3>
-
-
-        <div class="imgsli"> 
-            
-            
-            <i class="fa-brands fa-html5" style="color: rgb(233, 106, 73);"><p>HTML</p> </i>
-            
-
-
-
-            <i class="fa-brands fa-css" style="color: rgb(116, 192, 252);"><p>CSS3</p> </i> 
-
-
-
-            <i class="fa-brands fa-square-js" style="color: rgb(255, 212, 59);" ><p>JS</p></i>
-
-            <i class="fa-brands fa-git-alt" style="color: rgb(235, 126, 0);"><p>Git</p></i>
-
-
-
-
+    <!-- Rodapé -->
+    <footer id="rodape">
+        <div class="rodape-container">
+            <p>&copy; 2026 Lucas Emídio. Todos os direitos reservados.</p>
+            <p class="rodape-detalhe">Feito com código puro, criatividade &amp; café ☕</p>
         </div>
+    </footer>
 
-    </section>
-
-    <section id="final">
- <img src="imgs/mapa.png" alt="">
-        <div id="quadrofinal">
-<h3>VAMOS CONVERSAR ?</h3>
-
-<p>Estou em busca de novas oportunidades e desafios. Vamos criar algo incrivel juntos.</p>
-
-<a href="" id="entrarContato" >Entrar em Contato <i class="fa-solid fa-envelope" style="color: rgb(224, 219, 214);"></i></a>
-
-
-
-        </div>
-
-        <div id="contato">
- 
-   <p><i class="fa-solid fa-envelope" style="color: rgb(140, 101, 229);"></i> E-mail:        <a href="">lucasemidioyt@gmail.com</a></p>
-   <p> <i class="fa-solid fa-phone" style="color: rgb(140, 101, 229);"></i>Telefone: (88) 99868-0880</p>  
-  <p><i class="fa-solid fa-magnifying-glass-location" style="color: rgb(140, 101, 229);"></i> Brasil</p>
-  <p><i class="fa-brands fa-github"style="color: rgb(140, 101, 229);"></i> Github</p>
-
-
-        </div>
-
-    </section>
-
-    <footer>
-    <p>© 2026 Lucas - Todos os direitos reservados.</p>
-</footer>
+    <!-- JavaScript -->
+    <script src="port.js"></script>
 </body>
 
 </html>
