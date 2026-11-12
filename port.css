@@ -77,7 +77,7 @@ body {
     min-height: 100vh;
 }
 
-/* 3. Animações de Fundo: Canvas, Orbes e Spotlight */
+/* 3. Animações de Fundo: Canvas, Orbes, Rastro de Fumaça e Cursor Brilhante */
 #bg-canvas {
     position: fixed;
     top: 0;
@@ -86,6 +86,36 @@ body {
     height: 100vh;
     z-index: -3;
     pointer-events: none;
+}
+
+#cursor-smoke-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9998;
+    pointer-events: none;
+}
+
+.mouse-glow-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 30%, #38bdf8 70%, #8b5cf6 100%);
+    box-shadow: 
+        0 0 12px 3px rgba(56, 189, 248, 0.9),
+        0 0 25px 6px rgba(139, 92, 246, 0.7),
+        0 0 45px 12px rgba(6, 182, 212, 0.4);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.05s ease-out;
 }
 
 .cursor-spotlight {
@@ -499,7 +529,7 @@ body.light-theme .hero-nome {
     display: flex;
     justify-content: center;
     align-items: center;
-    perspective: 1200px;
+    perspective: 1400px;
     padding-bottom: 70px;
 }
 
@@ -508,10 +538,10 @@ body.light-theme .hero-nome {
     width: 100%;
     max-width: 440px;
     transform-style: preserve-3d;
-    transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
+    will-change: transform;
 }
 
 .character-glow {
@@ -519,14 +549,23 @@ body.light-theme .hero-nome {
     top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 320px;
-    height: 320px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(59, 130, 246, 0.2) 50%, transparent 70%);
-    filter: blur(45px);
+    width: 340px;
+    height: 340px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.45) 0%, rgba(59, 130, 246, 0.25) 50%, transparent 70%);
+    filter: blur(50px);
     border-radius: 50%;
     z-index: 0;
     pointer-events: none;
-    transition: transform 0.2s ease-out;
+    will-change: transform;
+}
+
+.character-img-box {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transform-style: preserve-3d;
+    z-index: 2;
 }
 
 .character-img {
@@ -535,29 +574,58 @@ body.light-theme .hero-nome {
     object-fit: contain;
     position: relative;
     z-index: 2;
-    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7));
     pointer-events: none;
     user-select: none;
+    transition: filter 0.2s ease;
+}
+
+/* Brilho Especular 3D de Luz que se move sobre a Imagem */
+.character-specular-glare {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.35) 0%, rgba(139, 92, 246, 0.15) 30%, transparent 65%);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Sombra 3D Projetada no Chão */
+.character-shadow-3d {
+    position: absolute;
+    bottom: -8px;
+    width: 70%;
+    height: 20px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 75%);
+    border-radius: 50%;
+    filter: blur(8px);
+    z-index: 1;
+    pointer-events: none;
+    will-change: transform;
 }
 
 /* Efeito de Espelhamento Refletido */
 .character-reflection-container {
     position: relative;
     width: 100%;
-    height: 130px;
+    height: 140px;
     overflow: hidden;
-    margin-top: -10px;
+    margin-top: -12px;
     z-index: 1;
     pointer-events: none;
     transform: scaleY(-1);
-    opacity: 0.35;
+    opacity: 0.38;
+    transform-style: preserve-3d;
 }
 
 .character-reflection-img {
     width: 100%;
     max-height: 440px;
     object-fit: contain;
-    filter: blur(1.5px);
+    filter: blur(2px);
 }
 
 .reflection-gradient-fade {
@@ -574,9 +642,9 @@ body.light-theme .reflection-gradient-fade {
 .holographic-base {
     position: absolute;
     bottom: -15px;
-    width: 85%;
-    height: 25px;
-    background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.5) 0%, rgba(6, 182, 212, 0.2) 40%, transparent 75%);
+    width: 88%;
+    height: 28px;
+    background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.55) 0%, rgba(6, 182, 212, 0.25) 45%, transparent 75%);
     border-radius: 50%;
     filter: blur(4px);
     z-index: 0;

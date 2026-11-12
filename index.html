@@ -23,6 +23,10 @@
     <!-- Canvas de Partículas Interativas no Fundo -->
     <canvas id="bg-canvas"></canvas>
 
+    <!-- Canvas para Fumaça e Rastro Brilhante do Mouse -->
+    <canvas id="cursor-smoke-canvas"></canvas>
+    <div class="mouse-glow-dot" id="mouseGlowDot"></div>
+
     <!-- Orbes de Luz e Gradientes Animados de Fundo -->
     <div class="glow-orb orb-1"></div>
     <div class="glow-orb orb-2"></div>
@@ -135,16 +139,20 @@
                     <div class="hero-character-wrapper" id="characterWrapper">
                         <div class="character-glow" id="characterGlow"></div>
                         
-                        <!-- Imagem Principal -->
-                        <img src="imgs/imagem2.png" alt="Lucas Emídio Desenvolvedor" id="heroImage" class="character-img">
+                        <!-- Imagem Principal com Efeito de Luz 3D -->
+                        <div class="character-img-box">
+                            <img src="imgs/imagem2.png" alt="Lucas Emídio Desenvolvedor" id="heroImage" class="character-img">
+                            <div class="character-specular-glare" id="characterGlare"></div>
+                        </div>
                         
                         <!-- Efeito de Espelhamento Refletido na Base -->
-                        <div class="character-reflection-container">
+                        <div class="character-reflection-container" id="characterReflection">
                             <img src="imgs/imagem2.png" alt="" class="character-reflection-img" aria-hidden="true">
                             <div class="reflection-gradient-fade"></div>
                         </div>
 
-                        <!-- Chão com grade holográfica de luz -->
+                        <!-- Chão com grade holográfica de luz e sombra 3D -->
+                        <div class="character-shadow-3d" id="characterShadow"></div>
                         <div class="holographic-base"></div>
                     </div>
                 </div>
